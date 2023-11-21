@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage ("git") {
+            steps {
+                git 'https://github.com/yallala22/project.git'
+            }
+        }
+        stage ("build") {
+            steps {
+                sh "docker build -t image77 ."
+            }
+        }
+        stage ("container") {
+            steps {
+                sh "docker run -itd -p 8077:80 image77"
+            }
+        }
+    }
+}
